@@ -5,7 +5,7 @@ This tiny tool allows you to join a zoom meeting from your "Terminal" by invokin
 
 For a DevOps/SRE, we spend our significant time working with "Terminal", this becomes handy in case where we get a reminder for a meeting in such cases we can run this command and get Zoom client to start and drop us in meeting immediately.
 
-I prefer to use this tool for daily sync with team and others, when I am busy dealing with stuff in my "Terminal" and see the reminder for meeting, it becomes easy for me to just run 'dailySync<TAB>' and yo, I am in meeting, convinent right? :)
+I prefer to use this tool for daily sync with team and others, when I am busy dealing with stuff in my "Terminal" and see the reminder for meeting, it becomes easy for me to just run 'dailySync<TAB>' and yo, I am in meeting, convenient right? :)
 
 
 ### Create entry for meeting(s)
