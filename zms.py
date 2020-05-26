@@ -61,7 +61,7 @@ class ConfigManager(object):
         configs = self.read_config()
         try:
           del configs[alias_name]
-          log.info(f"remvoving alias entry for {alias_name}")
+          log.info(f"removing alias entry for {alias_name}")
           self.create_shell_alias_entry(configs)
           self.manage_config(configs)
         except KeyError:
@@ -126,7 +126,7 @@ def main(args):
                 log.info(f"[Meeting ID: {get_meet_id}] Joining Meeting...")
                 command_args = shlex.split(f"{prog} " + config_manager.zoommtg.format(get_meet_id))
                 pid = subprocess.Popen(command_args).pid
-                log.info(f"Started it with PID: {pid}, select audio type in zoom client")
+                log.info(f"Started it with PID: {pid}, select audio type in Zoom client")
 
             else:
                 # update meeting ID
@@ -150,7 +150,7 @@ def main(args):
             log.info(f"[Meeting ID: {get_meet_id}] Joining Meeting...")
             command_args = shlex.split(f"{prog} " + config_manager.zoommtg.format(get_meet_id))
             pid = subprocess.Popen(command_args).pid
-            log.info(f"Started it with PID: {pid}, select audio type in zoom client")
+            log.info(f"Started it with PID: {pid}, select audio type in Zoom client")
     
 
 if __name__ == '__main__':
