@@ -78,8 +78,11 @@ class ConfigManager(object):
     def list_meeting(self):
         """ list all existing entries """
         configs = self.read_config()
-        for alias, meeting_id in configs.items():
-            log.info(f"{alias}\t\t{meeting_id}")
+        if configs:
+            for alias, meeting_id in configs.items():
+                log.info(f"{alias}\t\t{meeting_id}"
+        else:
+            log.info("no entries found")
     
 
     def create_shell_alias_entry(self, configs):
