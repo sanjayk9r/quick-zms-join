@@ -75,7 +75,7 @@ class ConfigManager(object):
         configs = self.read_config()
         if configs:
             for alias, meeting_id in configs.items():
-                print(f"{alias}\t\t{meeting_id}")
+                print(f"{alias: <10}\t{meeting_id: <10}")
         else:
             print("no entry found")
     
