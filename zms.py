@@ -140,6 +140,8 @@ def main(args):
         else:
             # initialise the config file
             configs = config_manager.read_config()
+            if not configs:
+                configs = {}
             if config_manager.manage_config(configs):
                 print(f"config is initialised.")
                 if config_manager.add_meeting(meeting_id=args.meeting_id, alias_name=args.alias_name):
