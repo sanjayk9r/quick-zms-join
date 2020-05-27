@@ -80,9 +80,9 @@ class ConfigManager(object):
         configs = self.read_config()
         if configs:
             for alias, meeting_id in configs.items():
-                log.info(f"{alias}\t\t{meeting_id}"
+                log.info(f"{alias}\t\t{meeting_id}")
         else:
-            log.info("no entries found")
+            log.info("no entry found")
     
 
     def create_shell_alias_entry(self, configs):
