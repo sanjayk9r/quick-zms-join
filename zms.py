@@ -39,9 +39,13 @@ class ConfigManager(object):
 
     def read_config(self):
         """ read config stored in user home directory """
-        with open(self.config_abs_path) as f:
-            configs = json.load(f)
-            return configs
+        try:
+            with open(self.config_abs_path) as f:
+                configs = json.load(f)
+                return configs
+        except FileNotFoundError:
+            self.manage_config(configs={})
+            self.read_config()
 
 
     def get_meeting_id(self, alias_name):
