@@ -25,7 +25,7 @@ This will create alias for all the meetings you have added so far.
 
 ### List entry for all meeting(s)
 
-```./zms.py --list-entry```
+```./zms.py --list_entry```
 
 
 ### Join a meeting
