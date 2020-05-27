@@ -7,11 +7,6 @@ import subprocess
 import json
 import sys
 import os
-import logging
-
-
-logging.basicConfig(level=logging.INFO)
-log = logging.getLogger(__name__)
 
 
 class ConfigManager(object):
@@ -68,11 +63,11 @@ class ConfigManager(object):
         configs = self.read_config()
         try:
           del configs[alias_name]
-          log.info(f"removing alias entry for {alias_name}")
+          print(f"removing alias entry for {alias_name}")
           self.create_shell_alias_entry(configs)
           self.manage_config(configs)
         except KeyError:
-            log.info(f"{alias_name} doesn't exist, create it!")
+            print(f"{alias_name} doesn't exist, create it!")
 
     
     def list_meeting(self):
@@ -80,9 +75,9 @@ class ConfigManager(object):
         configs = self.read_config()
         if configs:
             for alias, meeting_id in configs.items():
-                log.info(f"{alias}\t\t{meeting_id}")
+                print(f"{alias}\t\t{meeting_id}")
         else:
-            log.info("no entry found")
+            print("no entry found")
     
 
     def create_shell_alias_entry(self, configs):
@@ -94,10 +89,10 @@ class ConfigManager(object):
         with open(self.sh_alias_file_path, 'w') as f:
             f.write(entries)
 
-        log.info("---")
-        log.info(f"Create entry in .bash_profile or .profile")
-        log.info(f"source {self.sh_alias_file_path}")
-        log.info("---")
+        print("---")
+        print(f"Create entry in .bash_profile or .profile")
+        print(f"source {self.sh_alias_file_path}")
+        print("---")
 
 
 def main(args):
@@ -114,14 +109,14 @@ def main(args):
         try:
             config_manager.create_shell_alias_entry(configs)
         except Exception as e:
-            log.info(f"error creating aliases - {e}")
+            print(f"error creating aliases - {e}")
 
     # Delete a meeting entry
     if args.remove_entry:
         if args.alias_name:
             config_manager.remove_meeting(args.alias_name)
         else:
-            log.info("must provide an alias name for an entry removal")       
+            print("must provide an alias name for an entry removal")       
 
     # List Meeting entries
     if args.list_entry:
@@ -133,22 +128,22 @@ def main(args):
             get_meet_id = config_manager.get_meeting_id(args.alias_name)
             if get_meet_id:
                 # Join Zoom Meeting
-                log.info(f"[Meeting ID: {get_meet_id}] Joining Meeting...")
+                print(f"[Meeting ID: {get_meet_id}] Joining Meeting...")
                 command_args = shlex.split(f"{prog} " + config_manager.zoommtg.format(get_meet_id))
                 pid = subprocess.Popen(command_args).pid
-                log.info(f"Started it with PID: {pid}, select audio type in Zoom client")
+                print(f"Started it with PID: {pid}, select audio type in Zoom client")
 
             else:
                 # update meeting ID
                 if config_manager.add_meeting(meeting_id=args.meeting_id, alias_name=args.alias_name):
-                    log.info(f"meeting id - {args.meeting_id} added with alias name: {args.alias_name}")
+                    print(f"meeting id - {args.meeting_id} added with alias name: {args.alias_name}")
         else:
             # initialise the config file
             configs = config_manager.read_config()
             if config_manager.manage_config(configs):
-                log.info(f"config is initialised.")
+                print(f"config is initialised.")
                 if config_manager.add_meeting(meeting_id=args.meeting_id, alias_name=args.alias_name):
-                    log.info(f"meeting id - {args.meeting_id} added with alias name: {args.alias_name}")
+                    print(f"meeting id - {args.meeting_id} added with alias name: {args.alias_name}")
     
     # Join Meeting with alias name
     if args.meeting_id is None \
@@ -157,10 +152,10 @@ def main(args):
         get_meet_id = config_manager.get_meeting_id(args.alias_name)
         if get_meet_id:
             # Join Zoom Meeting
-            log.info(f"[Meeting ID: {get_meet_id}] Joining Meeting...")
+            print(f"[Meeting ID: {get_meet_id}] Joining Meeting...")
             command_args = shlex.split(f"{prog} " + config_manager.zoommtg.format(get_meet_id))
             pid = subprocess.Popen(command_args).pid
-            log.info(f"Started it with PID: {pid}, select audio type in Zoom client")
+            print(f"Started it with PID: {pid}, select audio type in Zoom client")
     
 
 if __name__ == '__main__':
